@@ -1,7 +1,7 @@
 {
   "name": "angular-tinymce",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "TinyMce UI Component for Angular2",
   "repository": {
     "type": "git",
     "url": "https://github.com/siegerx3/angular-tinymce.git"
