@@ -1,0 +1,50 @@
+{
+  "name": "angular-tinymce",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siegerx3/angular-tinymce.git"
+  },
+  "author": "Benjamin Heilmann <benjamin.heilmann@yahoo.de>",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular2",
+    "tinymce",
+    "ng",
+    "ng2"
+  ],
+  "bugs": {
+    "url": "https://github.com/siegerx3/angular-tinymce/issues"
+  },
+  "scripts": {
+    "clean":"rimraf dist && rimraf .tmp && rimraf src/*.js && rimraf src/*.metadata.json && rimraf src/*.map && rimraf src/*.d.ts",
+    "lint": "tslint --project tsconfig.json",
+    "tsc": "tsc -p ./",
+    "ngc": "ngc -p tsconfig-aot.json",
+    "copy:js": "mkdir dist && copyfiles src/*.js dist -f && copyfiles src/*.js.map dist -f && copyfiles src/*.d.ts dist -f && copyfiles src/*.metadata.json dist -f && copyfiles src/typings/*.d.ts dist/typings -f",
+    "copy:package":"copyfiles package.json dist",
+    "copy":"npm run copy:js && npm run copy:package",
+    "prebuild":"npm run clean",
+    "build": "npm run lint && npm run ngc && npm run tsc && npm run copy"
+  },
+  "dependencies": {
+    "@angular/common": "^2.4.9",
+    "@angular/core": "^2.4.9",
+    "@angular/forms":"^2.4.9"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^2.4.9",
+    "@angular/compiler-cli": "^2.4.9",
+    "codelyzer": "~3.0.0-beta.0",
+    "rimraf": "~2.6.1",
+    "rxjs": "~5.2.0",
+    "ts-helpers": "~1.1.2",
+    "tslint": "~4.5.1",
+    "typescript": "~2.2.1",
+    "zone.js": "^0.7.7",
+    "clang-format": "1.0.48",
+    "copyfiles": "^1.0.0"
+  }
+}

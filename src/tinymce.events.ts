@@ -1,0 +1,35 @@
+﻿export class TinyMceEvents {
+  public static Click = 'click';
+  public static DblClick = 'dblClick';
+  public static MouseDown = 'MouseDown';
+  public static MouseUp = 'MouseUp';
+  public static MouseMove = 'MouseMove';
+  public static MouseOver = 'MouseOver';
+  public static MouseOut = 'MouseOut';
+  public static MouseEnter = 'MouseEnter';
+  public static MouseLeave = 'MouseLeave';
+  public static KeyDown = 'KeyDown';
+  public static KeyPress = 'KeyPress';
+  public static KeyUp = 'KeyUp';
+  public static ContextMenu = 'ContextMenu';
+  public static Paste = 'Paste';
+  public static Init = 'Init';
+  public static Focus = 'Focus';
+  public static Blur = 'Blur';
+  public static BeforeSetContent = 'BeforeSetContent';
+  public static SetContent = 'SetContent';
+  public static GetContent = 'GetContent';
+  public static PreProcess = 'PreProcess';
+  public static PostProcess = 'PostProcess';
+  public static NodeChange = 'NodeChange';
+  public static Undo = 'Undo';
+  public static Redo = 'Redo';
+  public static Change = 'Change';
+  public static Dirty = 'Dirty';
+  public static Remove = 'Remove';
+  public static ExecCommand = 'ExecCommand';
+  public static PastePreProcess = 'PastePreProcess';
+  public static PastePostProcess = 'PastePostProcess';
+  public static AddEditor = 'AddEditor';
+  public static RemoveEditor = 'RemoveEditor';
+}
