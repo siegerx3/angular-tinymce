@@ -1,9 +1,12 @@
 # angular-tinymce
 
+[![npm version](https://badge.fury.io/js/angular-tinymce.svg)](https://badge.fury.io/js/angular-tinymce)
+
 ## Features
 
 - Supports all settings, events and plugins ([TinyMCE Documentation](https://www.tinymce.com/docs/configure/integration-and-setup/))
 - Supports AoT-Compilation
+- Full TinyMce typings included (just until the [PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/14918) on DefinetlyTyped is accepted)
 
 ## Usage
 
@@ -74,7 +77,7 @@ If you want to use different settings for each editor you can bind them to the `
 ```
 
 ##### Events
-If you want to bind any TinyMCE event just use the output property:
+If you want to bind any TinyMce event, just use the output property:
 (Event names are all lowercase)
 ```html
 <tinymce-editor (click)='yourHandler($event)'></tinymce-editor>
