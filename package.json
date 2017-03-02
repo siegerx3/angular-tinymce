@@ -25,7 +25,8 @@
     "ngc": "ngc -p tsconfig-aot.json",
     "copy:js": "mkdir dist && copyfiles src/*.js dist -f && copyfiles src/*.js.map dist -f && copyfiles src/*.d.ts dist -f && copyfiles src/*.metadata.json dist -f && copyfiles src/typings/*.d.ts dist/typings -f",
     "copy:package":"copyfiles package.json dist",
-    "copy":"npm run copy:js && npm run copy:package",
+    "copy:readme":"copyfiles readme.md dist",
+    "copy":"npm run copy:js && npm run copy:package && npm run copy:readme",
     "prebuild":"npm run clean",
     "build": "npm run lint && npm run ngc && npm run tsc && npm run copy"
   },
