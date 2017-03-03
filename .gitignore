@@ -1,3 +1,7 @@
 node_modules
 .tmp
 dist
+src/*.d.ts
+src/*.js
+src/*.js.map
+src/*.metadata.json
