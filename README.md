@@ -10,7 +10,7 @@
 
 ## Usage
 
-First, install the package package
+First, install the package
 ```
 npm install angular-tinymce
 ```
