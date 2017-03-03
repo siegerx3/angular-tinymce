@@ -4,7 +4,7 @@
 
 ## Features
 
-- Supports all settings, events and plugins ([TinyMCE Documentation](https://www.tinymce.com/docs/configure/integration-and-setup/))
+- Supports all settings, events and plugins ([TinyMce Documentation](https://www.tinymce.com/docs/configure/integration-and-setup/))
 - Supports AoT-Compilation
 - Full TinyMce typings included (just until the [PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/14918) on DefinetlyTyped is accepted)
 
@@ -36,7 +36,7 @@ import 'tinymce/themes/modern/theme';
 ```
 
 #### Setup
-Import `TinymceModule` in your main or feature `module`:
+Import `TinyMceModule` in your main or feature `module`:
 
 ```typescript
 import { TinyMceModule } from 'angular-tinymce';
