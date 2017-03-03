@@ -27,13 +27,15 @@
     "copy:package":"copyfiles package.json dist",
     "copy:readme":"copyfiles readme.md dist",
     "copy":"npm run copy:js && npm run copy:package && npm run copy:readme",
+    "packagejson": "node ./scripts/packageJson.js",
     "prebuild":"npm run clean",
     "build": "npm run lint && npm run ngc && npm run tsc && npm run copy"
   },
   "dependencies": {
     "@angular/common": "^2.4.9",
     "@angular/core": "^2.4.9",
-    "@angular/forms":"^2.4.9"
+    "@angular/forms":"^2.4.9",
+    "tinymce": "~4.5.4"
   },
   "devDependencies": {
     "@angular/compiler": "^2.4.9",

@@ -10,10 +10,9 @@
 
 ## Usage
 
-First, install this and the `tinymce` package
+First, install the package package
 ```
 npm install angular-tinymce
-npm install tinymce
 ```
 #### Include or Import
 
@@ -30,7 +29,7 @@ Include the tinymce and all the plugin scripts you need in your `angular-cli.jso
 
 ##### Without [angular-cli](https://github.com/angular/angular-cli) (untested):
 
-Import tinymce and all the plugin scripts in your `module` or `component` where you want to use `angular-tinymce` 
+Import tinymce and all the plugin scripts in your `module` or `component` where you want to use `angular-tinymce`
 ```typescript
 import tinymce from 'tinymce/tinymce.js';
 import 'tinymce/themes/modern/theme';
