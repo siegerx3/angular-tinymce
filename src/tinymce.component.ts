@@ -178,8 +178,11 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.Remove, (e: TinyMce.Events.Event) => this.remove.emit(e));
       editor.on(TinyMceEvents.ExecCommand, (e: TinyMce.Events.CommandEvent) => {
         this.ngZone.run(() => {
-          this.onModelChange(this.editor.getContent());
-          this.onModelTouched();
+          const content = this.editor.getContent();
+          if (content != null && content.length > 0) {
+            this.onModelChange();
+            this.onModelTouched();
+          }
         });
         this.execcommand.emit(e);
       });
