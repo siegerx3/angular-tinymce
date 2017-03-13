@@ -35,7 +35,8 @@
     "@angular/common": "^2.4.9",
     "@angular/core": "^2.4.9",
     "@angular/forms":"^2.4.9",
-    "tinymce": "~4.5.4"
+    "tinymce": "~4.5.4",
+	"@types/tinymce": "~4.5.1"
   },
   "devDependencies": {
     "@angular/compiler": "^2.4.9",

@@ -6,7 +6,6 @@
 
 - Supports all settings, events and plugins ([TinyMce Documentation](https://www.tinymce.com/docs/configure/integration-and-setup/))
 - Supports AoT-Compilation
-- Full TinyMce typings included (just until the [PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/14918) on DefinetlyTyped is accepted)
 
 ## Usage
 
