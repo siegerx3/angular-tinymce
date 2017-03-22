@@ -57,10 +57,12 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-    if (isDisabled) {
-      this.editor.getBody().setAttribute('contenteditable', 'false');
-    } else {
-      this.editor.getBody().setAttribute('contenteditable', 'true');
+    if (this.editor) {
+      if (isDisabled) {
+        this.editor.getBody().setAttribute('contenteditable', 'false');
+      } else {
+        this.editor.getBody().setAttribute('contenteditable', 'true');
+      }
     }
   }
 
