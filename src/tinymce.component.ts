@@ -21,6 +21,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 
+import { tinymce } from 'tinymce';
+
 import { TinyMceEvents } from './tinymce.events';
 
 export const TINYMCE_VALUE_ACCESSOR: any = {
@@ -73,7 +75,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   isDisabled: boolean;
 
   // Config Properties
-  @Input() settings: TinyMce.Settings;
+  @Input() settings: tinymce.Settings;
   @Input() selector: string;
 
   // Native events
@@ -93,25 +95,25 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   @Output() public paste: EventEmitter<ClipboardEvent> = new EventEmitter();
 
   // Core events
-  @Output() public init: EventEmitter<TinyMce.Events.Event> = new EventEmitter();
-  @Output() public focus: EventEmitter<TinyMce.Events.FocusBlurEvent> = new EventEmitter();
-  @Output() public blur: EventEmitter<TinyMce.Events.FocusBlurEvent> = new EventEmitter();
-  @Output() public beforesetcontent: EventEmitter<TinyMce.Events.ContentEvent> = new EventEmitter();
-  @Output() public setcontent: EventEmitter<TinyMce.Events.ContentEvent> = new EventEmitter();
-  @Output() public getcontent: EventEmitter<TinyMce.Events.ContentEvent> = new EventEmitter();
-  @Output() public preprocess: EventEmitter<TinyMce.Events.ProcessEvent> = new EventEmitter();
-  @Output() public postprocess: EventEmitter<TinyMce.Events.ProcessEvent> = new EventEmitter();
-  @Output() public nodechange: EventEmitter<TinyMce.Events.NodeChangeEvent> = new EventEmitter();
-  @Output() public undo: EventEmitter<TinyMce.Events.UndoRedoEvent> = new EventEmitter();
-  @Output() public redo: EventEmitter<TinyMce.Events.UndoRedoEvent> = new EventEmitter();
-  @Output() public change: EventEmitter<TinyMce.Events.ChangeEvent> = new EventEmitter();
-  @Output() public dirty: EventEmitter<TinyMce.Events.Event> = new EventEmitter();
-  @Output() public remove: EventEmitter<TinyMce.Events.Event> = new EventEmitter();
-  @Output() public execcommand: EventEmitter<TinyMce.Events.CommandEvent> = new EventEmitter();
-  @Output() public pastepreprocess: EventEmitter<TinyMce.Events.ContentEvent> = new EventEmitter();
-  @Output() public pastepostprocess: EventEmitter<TinyMce.Events.ContentEvent> = new EventEmitter();
+  @Output() public init: EventEmitter<tinymce.Events.Event> = new EventEmitter();
+  @Output() public focus: EventEmitter<tinymce.Events.FocusBlurEvent> = new EventEmitter();
+  @Output() public blur: EventEmitter<tinymce.Events.FocusBlurEvent> = new EventEmitter();
+  @Output() public beforesetcontent: EventEmitter<tinymce.Events.ContentEvent> = new EventEmitter();
+  @Output() public setcontent: EventEmitter<tinymce.Events.ContentEvent> = new EventEmitter();
+  @Output() public getcontent: EventEmitter<tinymce.Events.ContentEvent> = new EventEmitter();
+  @Output() public preprocess: EventEmitter<tinymce.Events.ProcessEvent> = new EventEmitter();
+  @Output() public postprocess: EventEmitter<tinymce.Events.ProcessEvent> = new EventEmitter();
+  @Output() public nodechange: EventEmitter<tinymce.Events.NodeChangeEvent> = new EventEmitter();
+  @Output() public undo: EventEmitter<tinymce.Events.UndoRedoEvent> = new EventEmitter();
+  @Output() public redo: EventEmitter<tinymce.Events.UndoRedoEvent> = new EventEmitter();
+  @Output() public change: EventEmitter<tinymce.Events.ChangeEvent> = new EventEmitter();
+  @Output() public dirty: EventEmitter<tinymce.Events.Event> = new EventEmitter();
+  @Output() public remove: EventEmitter<tinymce.Events.Event> = new EventEmitter();
+  @Output() public execcommand: EventEmitter<tinymce.Events.CommandEvent> = new EventEmitter();
+  @Output() public pastepreprocess: EventEmitter<tinymce.Events.ContentEvent> = new EventEmitter();
+  @Output() public pastepostprocess: EventEmitter<tinymce.Events.ContentEvent> = new EventEmitter();
 
-  editor: TinyMce.Editor;
+  editor: tinymce.Editor;
   @ViewChild('tinymce') elem: ElementRef;
 
   constructor( @Inject(TINYMCE_SETTINGS_TOKEN) private _settings: any, private ngZone: NgZone) {
@@ -131,7 +133,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     tinymce.init(this.settings);
   }
 
-  initCallbacks(settings: TinyMce.Settings): void {
+  initCallbacks(settings: tinymce.Settings): void {
 
     const orig = settings.init_instance_callback;
 
@@ -165,20 +167,20 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.ContextMenu, (e: MouseEvent) => this.contextmenu.emit(e));
       editor.on(TinyMceEvents.Paste, (e: ClipboardEvent) => this.paste.emit(e));
 
-      editor.on(TinyMceEvents.Focus, (e: TinyMce.Events.FocusBlurEvent) => this.focus.emit(e));
-      editor.on(TinyMceEvents.Blur, (e: TinyMce.Events.FocusBlurEvent) => this.blur.emit(e));
-      editor.on(TinyMceEvents.BeforeSetContent, (e: TinyMce.Events.ContentEvent) => this.beforesetcontent.emit(e));
-      editor.on(TinyMceEvents.SetContent, (e: TinyMce.Events.ContentEvent) => this.setcontent.emit(e));
-      editor.on(TinyMceEvents.GetContent, (e: TinyMce.Events.ContentEvent) => this.getcontent.emit(e));
-      editor.on(TinyMceEvents.PreProcess, (e: TinyMce.Events.ProcessEvent) => this.preprocess.emit(e));
-      editor.on(TinyMceEvents.PostProcess, (e: TinyMce.Events.ProcessEvent) => this.postprocess.emit(e));
-      editor.on(TinyMceEvents.NodeChange, (e: TinyMce.Events.NodeChangeEvent) => this.nodechange.emit(e));
-      editor.on(TinyMceEvents.Undo, (e: TinyMce.Events.UndoRedoEvent) => this.undo.emit(e));
-      editor.on(TinyMceEvents.Redo, (e: TinyMce.Events.UndoRedoEvent) => this.redo.emit(e));
-      editor.on(TinyMceEvents.Change, (e: TinyMce.Events.ChangeEvent) => this.change.emit(e));
-      editor.on(TinyMceEvents.Dirty, (e: TinyMce.Events.Event) => this.dirty.emit(e));
-      editor.on(TinyMceEvents.Remove, (e: TinyMce.Events.Event) => this.remove.emit(e));
-      editor.on(TinyMceEvents.ExecCommand, (e: TinyMce.Events.CommandEvent) => {
+      editor.on(TinyMceEvents.Focus, (e: tinymce.Events.FocusBlurEvent) => this.focus.emit(e));
+      editor.on(TinyMceEvents.Blur, (e: tinymce.Events.FocusBlurEvent) => this.blur.emit(e));
+      editor.on(TinyMceEvents.BeforeSetContent, (e: tinymce.Events.ContentEvent) => this.beforesetcontent.emit(e));
+      editor.on(TinyMceEvents.SetContent, (e: tinymce.Events.ContentEvent) => this.setcontent.emit(e));
+      editor.on(TinyMceEvents.GetContent, (e: tinymce.Events.ContentEvent) => this.getcontent.emit(e));
+      editor.on(TinyMceEvents.PreProcess, (e: tinymce.Events.ProcessEvent) => this.preprocess.emit(e));
+      editor.on(TinyMceEvents.PostProcess, (e: tinymce.Events.ProcessEvent) => this.postprocess.emit(e));
+      editor.on(TinyMceEvents.NodeChange, (e: tinymce.Events.NodeChangeEvent) => this.nodechange.emit(e));
+      editor.on(TinyMceEvents.Undo, (e: tinymce.Events.UndoRedoEvent) => this.undo.emit(e));
+      editor.on(TinyMceEvents.Redo, (e: tinymce.Events.UndoRedoEvent) => this.redo.emit(e));
+      editor.on(TinyMceEvents.Change, (e: tinymce.Events.ChangeEvent) => this.change.emit(e));
+      editor.on(TinyMceEvents.Dirty, (e: tinymce.Events.Event) => this.dirty.emit(e));
+      editor.on(TinyMceEvents.Remove, (e: tinymce.Events.Event) => this.remove.emit(e));
+      editor.on(TinyMceEvents.ExecCommand, (e: tinymce.Events.CommandEvent) => {
         this.ngZone.run(() => {
           const content = this.editor.getContent();
           if (content != null && content.length > 0) {
@@ -188,16 +190,16 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
         });
         this.execcommand.emit(e);
       });
-      editor.on(TinyMceEvents.PastePreProcess, (e: TinyMce.Events.ContentEvent) => this.pastepreprocess.emit(e));
-      editor.on(TinyMceEvents.PastePostProcess, (e: TinyMce.Events.ContentEvent) => this.pastepostprocess.emit(e));
+      editor.on(TinyMceEvents.PastePreProcess, (e: tinymce.Events.ContentEvent) => this.pastepreprocess.emit(e));
+      editor.on(TinyMceEvents.PastePostProcess, (e: tinymce.Events.ContentEvent) => this.pastepostprocess.emit(e));
     };
 
     settings.setup = editor => {
-      editor.on(TinyMceEvents.Init, (e: TinyMce.Events.Event) => this.init.emit(e));
+      editor.on(TinyMceEvents.Init, (e: tinymce.Events.Event) => this.init.emit(e));
     };
   }
 
   ngOnDestroy(): void {
-    tinymce.remove(this.editor);
+    (tinymce as any).remove(this.editor);
   }
 }
