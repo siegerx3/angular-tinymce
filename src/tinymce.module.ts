@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { TinyMceComponent, TINYMCE_SETTINGS_TOKEN } from './tinymce.component';
 
-import { tinymce } from 'tinymce';
-
 export * from './tinymce.component';
 export * from './tinymce.default';
 export * from './tinymce.events';
@@ -27,7 +25,7 @@ export function tinyMceDirectives() {
   exports: [tinyMceDirectives()]
 })
 export class TinyMceModule {
-  static forRoot(settings: tinymce.Settings): ModuleWithProviders {
+  static forRoot(settings: TinyMce.Settings): ModuleWithProviders {
     return {
       ngModule: TinyMceModule,
       providers: [

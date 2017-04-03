@@ -1,6 +1,6 @@
 {
   "name": "angular-tinymce",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "TinyMce UI Component for Angular2",
   "repository": {
     "type": "git",
@@ -35,8 +35,7 @@
     "@angular/common": "4.0.0",
     "@angular/core": "4.0.0",
     "@angular/forms":"4.0.0",
-    "tinymce": "~4.5.4",
-	  "@types/tinymce": "~4.5.1"
+    "tinymce": "~4.5.4"
   },
   "devDependencies": {
     "@angular/compiler": "4.0.0",
