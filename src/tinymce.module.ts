@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { TinyMceComponent, TINYMCE_SETTINGS_TOKEN } from './tinymce.component';
 
+import { tinymce as TinyMce } from 'tinymce';
+
 export * from './tinymce.component';
 export * from './tinymce.default';
 export * from './tinymce.events';

@@ -21,7 +21,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 
-import { TinyMceEvents } from './TinyMce.events';
+import { TinyMceEvents } from './tinymce.events';
+
+import { tinymce as TinyMce } from 'tinymce';
+declare var tinymce: TinyMce.EditorManager;
 
 export const TINYMCE_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -135,7 +138,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
     const orig = settings.init_instance_callback;
 
-    settings.init_instance_callback = editor => {
+    settings.init_instance_callback = (editor: TinyMce.Editor) => {
       this.editor = editor;
       if (this.beforeInitValue != null) {
         this.editor.setContent(this.beforeInitValue);
@@ -192,12 +195,12 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.PastePostProcess, (e: TinyMce.Events.ContentEvent) => this.pastepostprocess.emit(e));
     };
 
-    settings.setup = editor => {
+    settings.setup = (editor: TinyMce.Editor) => {
       editor.on(TinyMceEvents.Init, (e: TinyMce.Events.Event) => this.init.emit(e));
     };
   }
 
   ngOnDestroy(): void {
-    tinymce.remove(this.editor);
+    (tinymce as any).remove(this.editor);
   }
 }
