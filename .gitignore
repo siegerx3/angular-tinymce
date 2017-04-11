@@ -5,3 +5,6 @@ src/*.d.ts
 src/*.js
 src/*.js.map
 src/*.metadata.json
+
+./index.js
+./index.js.map

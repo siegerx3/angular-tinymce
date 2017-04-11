@@ -11,7 +11,7 @@
   Inject,
   AfterViewInit,
   OnDestroy,
-  OpaqueToken,
+  InjectionToken,
   ViewChild,
   ElementRef
 } from '@angular/core';
@@ -35,12 +35,12 @@ export const TINYMCE_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-export const TINYMCE_SETTINGS_TOKEN = new OpaqueToken('angular-tinymce-settings');
+export const TINYMCE_SETTINGS_TOKEN = new InjectionToken('angular-tinymce-settings');
 
 @Component({
-  selector: 'tinymce-editor',
-  template: `<textarea #tinymce ></textarea>`,
-  providers: [TINYMCE_VALUE_ACCESSOR]
+  selector: 'angular-tinymce',
+  template: `<textarea #tinymce ></textarea>` //>,
+  //providers: [TINYMCE_VALUE_ACCESSOR]
 })
 export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
 
@@ -146,7 +146,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     this.initCallbacks(this.settings);
     Observable
       .interval(300)
-      .skipWhile(() => !tinymce)
+      .skipWhile(() => !(window as any).tinymce)
       .take(1)
       .subscribe(() => {
         tinymce.init(this.settings);

@@ -1,27 +1,27 @@
 {
     "compilerOptions": {
-        "module": "es2015",
-        "target": "es5",
-        "noImplicitAny": true,
-        "experimentalDecorators": true,
+        "baseUrl": ".",
         "emitDecoratorMetadata": true,
-        "outDir": ".tmp/esm",
-        "rootDir": ".",
-        "sourceMap": true,
-        "removeComments": false,
+        "experimentalDecorators": true,
+        "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "noImplicitAny": true,
+        "noFallthroughCasesInSwitch": true,
+        "sourceMap": true,
+        "rootDir": ".",
+        "inlineSources": true,
         "lib": [
-            "es2015",
+            "es6",
             "dom"
+        ],
+        "target": "es5",
+        "skipLibCheck": true,
+        "types": [
+            "jasmine",
+            "node"
         ]
     },
-    "angularCompilerOptions": {
-        "genDir": ".tmp",
-        "debug": false,
-        "skipMetadataEmit": false
-    },
-    "include": [
-        "src/**/*"
+    "exclude": [
+        "node_modules"
     ]
 }

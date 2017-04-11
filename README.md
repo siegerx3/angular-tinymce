@@ -2,6 +2,11 @@
 
 [![npm version](https://badge.fury.io/js/angular-tinymce.svg)](https://badge.fury.io/js/angular-tinymce)
 
+## Important changes
+
+- `tinymce-editor` is now `angular-tinymce`
+- Due to building changes the TinyMce script won't be loaded automatically anymore. The app will now have a smaller filesize but you have to include the tinymce script manually. Check under "Include or Import" how to do so.
+
 ## Features
 
 - Supports all settings, events and plugins ([TinyMce Documentation](https://www.tinymce.com/docs/configure/integration-and-setup/))

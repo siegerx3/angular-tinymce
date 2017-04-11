@@ -1,6 +1,6 @@
 {
   "name": "angular-tinymce",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "TinyMce UI Component for Angular2",
   "repository": {
     "type": "git",
@@ -18,41 +18,44 @@
   "bugs": {
     "url": "https://github.com/siegerx3/angular-tinymce/issues"
   },
-  "main": "./bundles/angular-library-starter.umd.js",
-  "module": "./modules/angular-library-starter.es5.js",
-  "es2015": "./modules/angular-library-starter.js",
+  "main": "./bundles/angular-tinymce.umd.js",
+  "module": "./modules/angular-tinymce.es5.js",
+  "es2015": "./modules/angular-tinymce.js",
   "scripts": {
-    "clean":"rimraf dist && rimraf .tmp && rimraf src/*.js && rimraf src/*.metadata.json && rimraf src/*.map && rimraf src/*.d.ts",
-    "lint": "tslint --project tsconfig.json",
-    "tsc": "tsc -p ./",
-    "ngc": "ngc -p tsconfig-build.json",
-    "rollup": "rollup -i dist/index.js -o dist/modules/angular-tinymce.js --sourcemap",
-    "copy:js": "mkdir dist && copyfiles src/*.js dist -f && copyfiles src/*.js.map dist -f && copyfiles src/*.d.ts dist -f && copyfiles src/*.metadata.json dist -f && copyfiles src/typings/*.d.ts dist/typings -f",
-    "copy:package":"copyfiles package.json dist",
-    "copy:readme":"copyfiles readme.md dist",
-    "copy":"npm run copy:js && npm run copy:package && npm run copy:readme",
-    "packagejson": "node ./scripts/packageJson.js",
-    "prebuild":"npm run clean",
-    "build": "npm run lint && npm run ngc && npm run copy && npm run packagejson"
+      "build": "node build.js",
+      "pack-lib": "npm pack ./dist",
+      "publish-lib": "npm publish ./dist"
   },
-  "dependencies": {
-    "@angular/common": "4.0.0",
-    "@angular/core": "4.0.0",
-    "@angular/forms":"4.0.0",
-    "@types/tinymce":"4.5.3",
-    "tinymce": "~4.5.4"
+  "typings": "./index.d.ts",
+  "peerDependencies": {
+      "@angular/common": ">= 4.0.0",
+      "@angular/core": ">= 4.0.0",
+      "@angular/forms": ">= 4.0.0",
+      "tinymce":">= 4.5.4"
   },
   "devDependencies": {
-    "@angular/compiler": "4.0.0",
-    "@angular/compiler-cli": "4.0.0",
-    "codelyzer": "2.0.0",
-    "rimraf": "~2.6.1",
-    "rxjs": "~5.2.0",
-    "ts-helpers": "~1.1.2",
-    "tslint": "~4.5.1",
-    "typescript": "~2.2.2",
-    "zone.js": "^0.8.5",
-    "clang-format": "1.0.48",
-    "copyfiles": "^1.0.0"
+      "@angular/common": "4.0.0",
+      "@angular/compiler": "4.0.0",
+      "@angular/compiler-cli": "4.0.0",
+      "@angular/core": "4.0.0",
+      "@angular/forms": "4.0.0",
+      "@types/node": "7.0.10",
+      "@types/tinymce":"~4.5.3",
+      "tinymce":"~4.5.4",
+      "codelyzer": "3.0.0-beta.4",
+      "core-js": "2.4.1",
+      "reflect-metadata": "0.1.10",
+      "rollup": "0.41.6",
+      "rxjs": "5.2.0",
+      "ts-helpers": "1.1.2",
+      "ts-loader": "2.0.3",
+      "tslint": "4.5.1",
+      "typescript": "^2.1.5",
+      "zone.js": "0.8.5",
+      "shelljs": "0.7.7",
+      "chalk": "1.1.3",
+      "uglify-js": "2.8.15",
+      "sorcery": "0.10.0",
+      "yargs": "7.0.2"
   }
 }
