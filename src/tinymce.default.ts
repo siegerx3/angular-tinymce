@@ -1,5 +1,9 @@
-﻿export function tinymceDefaultSettings() {
+import { tinymce as TinyMce } from 'tinymce';
+
+export function tinymceDefaultSettings(): TinyMce.Settings | any {
   return {
-    skin_url: '/assets/skins/lightgray'
+    tinymceScriptURL: '/assets/tinymce/tinymce.min.js',
+    theme_url: '/assets/tinymce/themes/modern/theme.min.js',
+    skin_url: '/assets/tinymce/skins/lightgray'
   };
 }

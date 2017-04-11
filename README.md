@@ -15,9 +15,9 @@ npm install angular-tinymce
 ```
 #### Include or Import
 
-##### With [angular-cli](https://github.com/angular/angular-cli):
+##### Method 1:
 
-Include the tinymce and all the plugin scripts you need in your `angular-cli.json`
+Include tinymce and all the plugin scripts you need in your `angular-cli.json`
 
 ```javascript
 "scripts": [
@@ -26,12 +26,17 @@ Include the tinymce and all the plugin scripts you need in your `angular-cli.jso
 ]
 ```
 
-##### Without [angular-cli](https://github.com/angular/angular-cli) (untested):
+##### Method 2:
 
-Import tinymce and all the plugin scripts in your `module` or `component` where you want to use `angular-tinymce`
+Copy tinymce and all the plugins/themes you need into your asset folder and set following properties in the settings:
+
 ```typescript
-import tinymce from 'tinymce/tinymce.js';
-import 'tinymce/themes/modern/theme';
+{
+    tinymceScriptURL: 'assets/tinymce/tinymce.min.js',
+    baseURL: '',
+    skin_url: '/assets/tinymce/skins/lightgray',
+    theme_url: '/assets/tinymce/themes/modern/theme.min.js'
+}
 ```
 
 #### Setup

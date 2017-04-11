@@ -1,6 +1,6 @@
 {
   "name": "angular-tinymce",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "TinyMce UI Component for Angular2",
   "repository": {
     "type": "git",
@@ -18,18 +18,22 @@
   "bugs": {
     "url": "https://github.com/siegerx3/angular-tinymce/issues"
   },
+  "main": "./bundles/angular-library-starter.umd.js",
+  "module": "./modules/angular-library-starter.es5.js",
+  "es2015": "./modules/angular-library-starter.js",
   "scripts": {
     "clean":"rimraf dist && rimraf .tmp && rimraf src/*.js && rimraf src/*.metadata.json && rimraf src/*.map && rimraf src/*.d.ts",
     "lint": "tslint --project tsconfig.json",
     "tsc": "tsc -p ./",
-    "ngc": "ngc -p tsconfig-aot.json",
+    "ngc": "ngc -p tsconfig-build.json",
+    "rollup": "rollup -i dist/index.js -o dist/modules/angular-tinymce.js --sourcemap",
     "copy:js": "mkdir dist && copyfiles src/*.js dist -f && copyfiles src/*.js.map dist -f && copyfiles src/*.d.ts dist -f && copyfiles src/*.metadata.json dist -f && copyfiles src/typings/*.d.ts dist/typings -f",
     "copy:package":"copyfiles package.json dist",
     "copy:readme":"copyfiles readme.md dist",
     "copy":"npm run copy:js && npm run copy:package && npm run copy:readme",
     "packagejson": "node ./scripts/packageJson.js",
     "prebuild":"npm run clean",
-    "build": "npm run lint && npm run ngc && npm run tsc && npm run copy && npm run packagejson"
+    "build": "npm run lint && npm run ngc && npm run copy && npm run packagejson"
   },
   "dependencies": {
     "@angular/common": "4.0.0",
