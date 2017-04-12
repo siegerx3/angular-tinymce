@@ -29,18 +29,16 @@ import { TinyMceEvents } from './tinymce.events';
 import { tinymce as TinyMce } from 'tinymce';
 declare var tinymce: TinyMce.EditorManager;
 
-export const TINYMCE_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => TinyMceComponent),
-  multi: true
-};
-
 export const TINYMCE_SETTINGS_TOKEN = new InjectionToken('angular-tinymce-settings');
 
 @Component({
   selector: 'angular-tinymce',
-  template: `<textarea #tinymce ></textarea>` //>,
-  //providers: [TINYMCE_VALUE_ACCESSOR]
+  template: `<textarea #tinymce ></textarea>`,
+  providers: [{
+	  provide: NG_VALUE_ACCESSOR,
+	  useExisting: forwardRef(() => TinyMceComponent),
+	  multi: true
+	}]
 })
 export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
 
