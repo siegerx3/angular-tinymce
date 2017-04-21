@@ -8,3 +8,5 @@ src/*.metadata.json
 
 ./index.js
 ./index.js.map
+.vs
+.vscode
