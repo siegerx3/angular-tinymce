@@ -1,4 +1,4 @@
-import { tinymce as TinyMce } from 'tinymce';
+import * as TinyMce from 'tinymce';
 
 export function tinymceDefaultSettings(): TinyMce.Settings | any {
   return {

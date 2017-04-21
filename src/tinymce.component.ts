@@ -26,7 +26,7 @@ import 'rxjs/add/observable/fromEvent';
 
 import { TinyMceEvents } from './tinymce.events';
 
-import { tinymce as TinyMce } from 'tinymce';
+import * as TinyMce from 'tinymce';
 declare var tinymce: TinyMce.EditorManager;
 
 export const TINYMCE_SETTINGS_TOKEN = new InjectionToken('angular-tinymce-settings');

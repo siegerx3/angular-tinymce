@@ -1,7 +1,7 @@
 ﻿import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { tinymce as TinyMce } from 'tinymce';
+import * as TinyMce from 'tinymce';
 
 import { TinyMceComponent, TINYMCE_SETTINGS_TOKEN } from './tinymce.component';
 
