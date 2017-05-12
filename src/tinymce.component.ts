@@ -35,10 +35,10 @@ export const TINYMCE_SETTINGS_TOKEN = new InjectionToken('angular-tinymce-settin
   selector: 'angular-tinymce',
   template: `<textarea #tinymce ></textarea>`,
   providers: [{
-	  provide: NG_VALUE_ACCESSOR,
-	  useExisting: forwardRef(() => TinyMceComponent),
-	  multi: true
-	}]
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => TinyMceComponent),
+    multi: true
+  }]
 })
 export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
 
@@ -63,9 +63,9 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     this.isDisabled = isDisabled;
     if (this.editor) {
       if (isDisabled) {
-		this.editor.setMode('readonly');
+        this.editor.setMode('readonly');
       } else {
-		this.editor.setMode('design');
+        this.editor.setMode('design');
       }
     }
   }
@@ -75,7 +75,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
   beforeInitValue: string;
   isDisabled: boolean;
-  
+
   // Config Properties
   @Input() settings: TinyMce.Settings;
   @Input() selector: string;
@@ -219,6 +219,8 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   }
 
   ngOnDestroy(): void {
-    (tinymce as any).remove(this.editor);
+    if (this.editor) {
+      (tinymce as any).remove(this.editor);
+    }
   }
 }
