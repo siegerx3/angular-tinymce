@@ -68,11 +68,11 @@ TinyMceModule.forRoot(tinymceDefaultSettings())
 
 Usage in HTML
 ```html
-<tinymce-editor [formControl]='contentControl'></tinymce-editor>
+<angular-tinymce [formControl]='contentControl'></angular-tinymce>
 ```
 or
 ```html
-<tinymce-editor [(ngModel)]='content'></tinymce-editor>
+<angular-tinymce [(ngModel)]='content'></angular-tinymce>
 ```
 
 #### Configuration
@@ -81,14 +81,14 @@ or
 If you want to use different settings for each editor you can bind them to the `settings` input property:
 
 ```html
-<tinymce-editor [settings]='yourSettingsObject'></tinymce-editor>
+<angular-tinymce [settings]='yourSettingsObject'></angular-tinymce>
 ```
 
 ##### Events
 If you want to bind any TinyMce event, just use the output property:
 (Event names are all lowercase)
 ```html
-<tinymce-editor (click)='yourHandler($event)'></tinymce-editor>
+<angular-tinymce (click)='yourHandler($event)'></angular-tinymce>
 ```
 All events are supported.
 [List of all events](https://www.tinymce.com/docs/advanced/events/)

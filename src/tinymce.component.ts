@@ -59,10 +59,14 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     this.onModelTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+  setDisabledState?(disabled: boolean): void {
+    this.disabled = disabled;
+    this.setEditorMode(disabled);
+  }
+
+  setEditorMode(disabled: boolean) {
     if (this.editor) {
-      if (isDisabled) {
+      if (disabled) {
         this.editor.setMode('readonly');
       } else {
         this.editor.setMode('design');
@@ -74,6 +78,9 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   onModelTouched: Function = () => { };
 
   beforeInitValue: string;
+  disabled: boolean;
+
+  @Input()
   isDisabled: boolean;
 
   // Config Properties
@@ -137,6 +144,9 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     if (changes['settings']) {
       this.settings = Object.assign({}, changes['settings'].currentValue);
     }
+    if (changes['isDisabled']) {
+      this.setDisabledState(changes['isDisabled'].currentValue);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -158,6 +168,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
     settings.init_instance_callback = (editor: TinyMce.Editor) => {
       this.editor = editor;
+      this.setEditorMode(this.disabled);
       if (this.beforeInitValue != null) {
         this.editor.setContent(this.beforeInitValue);
       }
