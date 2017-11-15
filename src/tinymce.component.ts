@@ -45,6 +45,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   writeValue(obj: any): void {
     const val = obj != null ? obj.toString() : '';
     if (this.editor) {
+      this.fromWriteValue = true;
       this.editor.setContent(val);
     } else {
       this.beforeInitValue = val;
@@ -79,6 +80,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
   beforeInitValue: string;
   disabled: boolean;
+  fromWriteValue: boolean;
 
   @Input()
   isDisabled: boolean;
@@ -141,6 +143,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if(changes === null) return;
     if (changes['settings']) {
       this.settings = Object.assign({}, changes['settings'].currentValue);
     }
@@ -152,11 +155,10 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   ngAfterViewInit(): void {
     this.settings.target = this.elem.nativeElement;
     this.initCallbacks(this.settings);
-    Observable
-      .interval(300)
-      .skipWhile(() => !(window as any).tinymce)
-      .take(1)
-      .subscribe(() => {
+    Observable.interval(300)
+        .skipWhile(() => !(window as any).tinymce)
+        .take(1)
+        .subscribe(() => {
         tinymce.init(this.settings);
       });
 
@@ -189,8 +191,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.KeyPress, (e: KeyboardEvent) => this.keypress.emit(e));
       editor.on(TinyMceEvents.KeyUp, (e: KeyboardEvent) => {
         this.ngZone.run(() => {
-          this.onModelChange(this.editor.getContent());
-          this.onModelTouched();
+          this.triggerChange();
         });
         this.keyup.emit(e);
       });
@@ -200,7 +201,12 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.Focus, (e: TinyMce.Events.FocusBlurEvent) => this.focus.emit(e));
       editor.on(TinyMceEvents.Blur, (e: TinyMce.Events.FocusBlurEvent) => this.blur.emit(e));
       editor.on(TinyMceEvents.BeforeSetContent, (e: TinyMce.Events.ContentEvent) => this.beforesetcontent.emit(e));
-      editor.on(TinyMceEvents.SetContent, (e: TinyMce.Events.ContentEvent) => this.setcontent.emit(e));
+      editor.on(TinyMceEvents.SetContent, (e: TinyMce.Events.ContentEvent) => {
+        this.ngZone.run(() => {
+          this.triggerChange();
+        });
+        this.setcontent.emit(e)
+      });
       editor.on(TinyMceEvents.GetContent, (e: TinyMce.Events.ContentEvent) => this.getcontent.emit(e));
       editor.on(TinyMceEvents.PreProcess, (e: TinyMce.Events.ProcessEvent) => this.preprocess.emit(e));
       editor.on(TinyMceEvents.PostProcess, (e: TinyMce.Events.ProcessEvent) => this.postprocess.emit(e));
@@ -212,11 +218,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.Remove, (e: TinyMce.Events.Event) => this.remove.emit(e));
       editor.on(TinyMceEvents.ExecCommand, (e: TinyMce.Events.CommandEvent) => {
         this.ngZone.run(() => {
-          const content = this.editor.getContent();
-          if (content != null && content.length > 0) {
-            this.onModelChange(content);
-            this.onModelTouched();
-          }
+          this.triggerChange();
         });
         this.execcommand.emit(e);
       });
@@ -227,6 +229,18 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     settings.setup = (editor: TinyMce.Editor) => {
       editor.on(TinyMceEvents.Init, (e: TinyMce.Events.Event) => this.init.emit(e));
     };
+  }
+
+  triggerChange() {
+    if (this.fromWriteValue) {
+      this.fromWriteValue = false;
+    } else {
+      const content = this.editor.getContent();
+      if (content != null && content.length > 0) {
+        this.onModelChange(content);
+        this.onModelTouched();
+      }
+    }
   }
 
   ngOnDestroy(): void {
