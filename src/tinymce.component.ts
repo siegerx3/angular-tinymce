@@ -166,16 +166,23 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
   initCallbacks(settings: TinyMce.Settings): void {
 
-    const orig = settings.init_instance_callback;
-
+    const origSetup = settings.setup;
+    settings.setup = (editor: TinyMce.Editor) => {
+      editor.on(TinyMceEvents.Init, (e: TinyMce.Events.Event) => this.init.emit(e));
+      if(origSetup){
+        origSetup(editor);
+      }
+    };
+    
+    const origInstanceCallback = settings.init_instance_callback;
     settings.init_instance_callback = (editor: TinyMce.Editor) => {
       this.editor = editor;
       this.setEditorMode(this.disabled);
       if (this.beforeInitValue != null) {
         this.editor.setContent(this.beforeInitValue);
       }
-      if (orig) {
-        orig(editor);
+      if (origInstanceCallback) {
+        origInstanceCallback(editor);
       }
 
       editor.on(TinyMceEvents.Click, (e: MouseEvent) => this.click.emit(e));
@@ -224,11 +231,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       });
       editor.on(TinyMceEvents.PastePreProcess, (e: TinyMce.Events.ContentEvent) => this.pastepreprocess.emit(e));
       editor.on(TinyMceEvents.PastePostProcess, (e: TinyMce.Events.ContentEvent) => this.pastepostprocess.emit(e));
-    };
-
-    settings.setup = (editor: TinyMce.Editor) => {
-      editor.on(TinyMceEvents.Init, (e: TinyMce.Events.Event) => this.init.emit(e));
-    };
+    };   
   }
 
   triggerChange() {
