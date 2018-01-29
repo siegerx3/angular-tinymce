@@ -238,7 +238,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     if (this.fromWriteValue) {
       this.fromWriteValue = false;
     } else {
-      const content = this.editor.getContent();
+      let content = this.editor.getContent();
       if(!content){
         content = '';
       }
