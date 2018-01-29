@@ -239,10 +239,11 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       this.fromWriteValue = false;
     } else {
       const content = this.editor.getContent();
-      if (content != null && content.length > 0) {
-        this.onModelChange(content);
-        this.onModelTouched();
+      if(!content){
+        content = '';
       }
+      this.onModelChange(content);
+      this.onModelTouched();
     }
   }
 
