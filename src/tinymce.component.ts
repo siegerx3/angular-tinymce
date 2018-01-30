@@ -86,7 +86,17 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   isDisabled: boolean;
 
   // Config Properties
-  @Input() settings: TinyMce.Settings;
+  private _settings: TinyMce.Settings;
+
+  get settings(): TinyMce.Settings {
+    return this._settings;
+  };
+
+  @Input() set settings(value) {
+    if (value) {
+      this._settings = value;
+    }
+  };
   @Input() selector: string;
 
   // Native events
@@ -127,9 +137,9 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   editor: TinyMce.Editor;
   @ViewChild('tinymce') elem: ElementRef;
 
-  constructor( @Inject(TINYMCE_SETTINGS_TOKEN) private _settings: any, private ngZone: NgZone) {
-    const localSettings = this.settings || _settings || {};
-    this.settings = Object.assign({}, localSettings);
+  constructor( @Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
+
+    this._setSettings(this.settings);
 
     if (!(window as any).tinymce && !document.getElementById('tinymceScript')) {
       const tag = document.createElement('script');
@@ -142,26 +152,55 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     }
   }
 
+  private _setSettings(settings: any) {
+    const localSettings = settings || this._input_settings || {};
+    this.settings = Object.assign({}, localSettings);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    if(changes === null) return;
+    let needReinit = false;
+    if (changes === null) return;
     if (changes['settings']) {
-      this.settings = Object.assign({}, changes['settings'].currentValue);
+
+      if (changes['settings']['currentValue']) {
+        this._setSettings(changes['settings']['currentValue']);
+        needReinit = true;
+      }
     }
     if (changes['isDisabled']) {
       this.setDisabledState(changes['isDisabled'].currentValue);
     }
+
+    if (needReinit) {
+      this.reInitEditor();
+    }
   }
 
   ngAfterViewInit(): void {
+    this.initEditor();
+  }
+
+  initEditor(): void {
     this.settings.target = this.elem.nativeElement;
     this.initCallbacks(this.settings);
     Observable.interval(300)
-        .skipWhile(() => !(window as any).tinymce)
-        .take(1)
-        .subscribe(() => {
+      .skipWhile(() => !(window as any).tinymce)
+      .take(1)
+      .subscribe(() => {
         tinymce.init(this.settings);
       });
+  }
 
+
+  reInitEditor(): void {
+    if (this.editor) {
+      this.ngZone.run(() => {
+        this.triggerChange(true);
+      });
+    }
+
+    this.removeEditor();
+    this.initEditor();
   }
 
   initCallbacks(settings: TinyMce.Settings): void {
@@ -169,11 +208,11 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     const origSetup = settings.setup;
     settings.setup = (editor: TinyMce.Editor) => {
       editor.on(TinyMceEvents.Init, (e: TinyMce.Events.Event) => this.init.emit(e));
-      if(origSetup){
+      if (origSetup) {
         origSetup(editor);
       }
     };
-    
+
     const origInstanceCallback = settings.init_instance_callback;
     settings.init_instance_callback = (editor: TinyMce.Editor) => {
       this.editor = editor;
@@ -231,25 +270,32 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       });
       editor.on(TinyMceEvents.PastePreProcess, (e: TinyMce.Events.ContentEvent) => this.pastepreprocess.emit(e));
       editor.on(TinyMceEvents.PastePostProcess, (e: TinyMce.Events.ContentEvent) => this.pastepostprocess.emit(e));
-    };   
+    };
   }
 
-  triggerChange() {
+  triggerChange(forReInit = false) {
     if (this.fromWriteValue) {
       this.fromWriteValue = false;
     } else {
-      const content = this.editor.getContent();
-      if(!content){
+      let content = this.editor.getContent();
+      if (!content) {
         content = '';
+      }
+      if (forReInit) {
+        this.beforeInitValue = content;
       }
       this.onModelChange(content);
       this.onModelTouched();
     }
   }
 
-  ngOnDestroy(): void {
+  removeEditor(): void {
     if (this.editor) {
       (tinymce as any).remove(this.editor);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.removeEditor();
   }
 }
