@@ -137,7 +137,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   editor: TinyMce.Editor;
   @ViewChild('tinymce') elem: ElementRef;
 
-  constructor( @Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
+  constructor(@Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
 
     this._setSettings(this.settings);
 
@@ -259,7 +259,12 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
       editor.on(TinyMceEvents.NodeChange, (e: TinyMce.Events.NodeChangeEvent) => this.nodechange.emit(e));
       editor.on(TinyMceEvents.Undo, (e: TinyMce.Events.UndoRedoEvent) => this.undo.emit(e));
       editor.on(TinyMceEvents.Redo, (e: TinyMce.Events.UndoRedoEvent) => this.redo.emit(e));
-      editor.on(TinyMceEvents.Change, (e: TinyMce.Events.ChangeEvent) => this.change.emit(e));
+      editor.on(TinyMceEvents.Change, (e: TinyMce.Events.ChangeEvent) => {
+        this.ngZone.run(() => {
+          this.triggerChange();
+        });
+        this.change.emit(e);
+      });
       editor.on(TinyMceEvents.Dirty, (e: TinyMce.Events.Event) => this.dirty.emit(e));
       editor.on(TinyMceEvents.Remove, (e: TinyMce.Events.Event) => this.remove.emit(e));
       editor.on(TinyMceEvents.ExecCommand, (e: TinyMce.Events.CommandEvent) => {
