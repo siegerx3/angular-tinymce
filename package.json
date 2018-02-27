@@ -1,6 +1,6 @@
 {
   "name": "angular-tinymce",
-  "version": "3.2.0",
+  "version": "5.0.0",
   "description": "TinyMce UI Component for Angular2",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "scripts": {
     "start": "ng serve --aot",
     "build": "ng-packagr -p ng-package.json",
-    "build-ghpages": "ng build --base-href \"https://zurfyx.github.io/angular-library-starter-kit/\" --output-path \"dist-ghpages\"",
+    "build-ghpages": "ng build --base-href \"https://siegerx3.github.io/angular-tinymce/\" --output-path \"dist-ghpages\"",
     "test": "npm run lint && ng test --watch false",
     "test-watch": "ng test",
     "e2e": "ng e2e",
