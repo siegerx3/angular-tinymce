@@ -42,42 +42,6 @@ export const TINYMCE_SETTINGS_TOKEN = new InjectionToken('angular-tinymce-settin
 })
 export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
 
-  writeValue(obj: any): void {
-    const val = obj != null ? obj.toString() : '';
-    if (this.editor) {
-      this.fromWriteValue = true;
-      this.editor.setContent(val);
-    } else {
-      this.beforeInitValue = val;
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.onModelChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onModelTouched = fn;
-  }
-
-  setDisabledState?(disabled: boolean): void {
-    this.disabled = disabled;
-    this.setEditorMode(disabled);
-  }
-
-  setEditorMode(disabled: boolean) {
-    if (this.editor) {
-      if (disabled) {
-        this.editor.setMode('readonly');
-      } else {
-        this.editor.setMode('design');
-      }
-    }
-  }
-
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
-
   beforeInitValue: string;
   disabled: boolean;
   fromWriteValue: boolean;
@@ -90,13 +54,13 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
 
   get settings(): TinyMce.Settings {
     return this._settings;
-  };
+  }
 
   @Input() set settings(value) {
     if (value) {
       this._settings = value;
     }
-  };
+  }
   @Input() selector: string;
 
   // Native events
@@ -137,7 +101,44 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   editor: TinyMce.Editor;
   @ViewChild('tinymce') elem: ElementRef;
 
-  constructor(@Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
+
+  writeValue(obj: any): void {
+    const val = obj != null ? obj.toString() : '';
+    if (this.editor) {
+      this.fromWriteValue = true;
+      this.editor.setContent(val);
+    } else {
+      this.beforeInitValue = val;
+    }
+  }
+
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
+
+  registerOnChange(fn: any): void {
+    this.onModelChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onModelTouched = fn;
+  }
+
+  setDisabledState?(disabled: boolean): void {
+    this.disabled = disabled;
+    this.setEditorMode(disabled);
+  }
+
+  setEditorMode(disabled: boolean) {
+    if (this.editor) {
+      if (disabled) {
+        this.editor.setMode('readonly');
+      } else {
+        this.editor.setMode('design');
+      }
+    }
+  }
+
+  constructor( @Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
 
     this._setSettings(this.settings);
 
@@ -155,15 +156,20 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   private _setSettings(settings: any) {
     const localSettings = settings || this._input_settings || {};
     this.settings = Object.assign({}, localSettings);
+    if ((window as any).tinymce) {
+      tinymce.baseURL = (this.settings as any).baseURL;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     let needReinit = false;
-    if (changes === null) return;
-    if (changes['settings']) {
+    if (changes === null) {
+      return;
+    }
 
-      if (changes['settings']['currentValue']) {
-        this._setSettings(changes['settings']['currentValue']);
+    if (changes['settings']) {
+      if (changes['settings'].currentValue) {
+        this._setSettings(changes['settings'].currentValue);
         needReinit = true;
       }
     }
@@ -251,7 +257,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
         this.ngZone.run(() => {
           this.triggerChange();
         });
-        this.setcontent.emit(e)
+        this.setcontent.emit(e);
       });
       editor.on(TinyMceEvents.GetContent, (e: TinyMce.Events.ContentEvent) => this.getcontent.emit(e));
       editor.on(TinyMceEvents.PreProcess, (e: TinyMce.Events.ProcessEvent) => this.preprocess.emit(e));
