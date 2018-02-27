@@ -622,10 +622,10 @@ var TinyMceComponent = (function () {
 /* harmony export (immutable) */ __webpack_exports__["a"] = tinymceDefaultSettings;
 function tinymceDefaultSettings() {
     return {
-        baseURL: '/assets/tinymce',
-        tinymceScriptURL: '/assets/tinymce/tinymce.min.js',
-        theme_url: '/assets/tinymce/themes/modern/theme.min.js',
-        skin_url: '/assets/tinymce/skins/lightgray'
+        baseURL: 'assets/tinymce',
+        tinymceScriptURL: 'assets/tinymce/tinymce.min.js',
+        theme_url: 'assets/tinymce/themes/modern/theme.min.js',
+        skin_url: 'assets/tinymce/skins/lightgray'
     };
 }
 
