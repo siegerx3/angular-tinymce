@@ -1,5 +1,7 @@
 # angular-tinymce
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/siegerx3/angular-tinymce.svg)](https://greenkeeper.io/)
+
 [![npm version](https://badge.fury.io/js/angular-tinymce.svg)](https://badge.fury.io/js/angular-tinymce)
 
 ## Important changes
