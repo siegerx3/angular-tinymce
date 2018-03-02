@@ -65,7 +65,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var AppComponent = (function () {
+var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.content = '';
         this.content2 = '';
@@ -110,7 +110,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -214,7 +214,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 var TINYMCE_SETTINGS_TOKEN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* InjectionToken */]('angular-tinymce-settings');
-var TinyMceComponent = (function () {
+var TinyMceComponent = /** @class */ (function () {
     function TinyMceComponent(_input_settings, ngZone) {
         var _this = this;
         this._input_settings = _input_settings;
@@ -637,7 +637,7 @@ function tinymceDefaultSettings() {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TinyMceEvents; });
-var TinyMceEvents = (function () {
+var TinyMceEvents = /** @class */ (function () {
     function TinyMceEvents() {
     }
     TinyMceEvents.Click = 'click';
@@ -700,7 +700,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 /**
  * Modul für ein TinyMce Input
  */
-var TinyMceModule = (function () {
+var TinyMceModule = /** @class */ (function () {
     function TinyMceModule() {
     }
     TinyMceModule_1 = TinyMceModule;
