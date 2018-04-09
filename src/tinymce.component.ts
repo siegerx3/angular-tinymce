@@ -33,7 +33,7 @@ export const TINYMCE_SETTINGS_TOKEN = new InjectionToken('angular-tinymce-settin
 
 @Component({
   selector: 'angular-tinymce',
-  template: `<textarea #tinymce ></textarea>`,
+  template: `<textarea style="visibility: hidden" #tinymce ></textarea>`,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => TinyMceComponent),
