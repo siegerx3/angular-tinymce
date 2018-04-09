@@ -597,7 +597,7 @@ var TinyMceComponent = /** @class */ (function () {
     TinyMceComponent = TinyMceComponent_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'angular-tinymce',
-            template: "<textarea #tinymce ></textarea>",
+            template: "<textarea style=\"visibility: hidden\" #tinymce ></textarea>",
             providers: [{
                     provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NG_VALUE_ACCESSOR */],
                     useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* forwardRef */])(function () { return TinyMceComponent_1; }),
