@@ -50,7 +50,7 @@
     "@angular/router": "^5.2.10",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.2",
-    "@types/node": "~9.6.5",
+    "@types/node": "~10.0.10",
     "@types/tinymce": "~4.5.16",
     "codelyzer": "^4.0.1",
     "core-js": "^2.4.1",
