@@ -65,7 +65,7 @@
     "ng-packagr": "^2.1.0",
     "protractor": "~5.3.0",
     "rxjs": "^5.5.2",
-    "tinymce": ">= 4.5.6",
+    "tinymce": "4.7.12",
     "ts-node": "~6.0.0",
     "tslint": "~5.9.1",
     "typescript": "~2.8.1",
