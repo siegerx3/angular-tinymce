@@ -26,7 +26,7 @@
     "test-watch": "ng test",
     "e2e": "ng e2e",
     "e2e-watch": "watch \"ng e2e -s false\" src e2e --wait=1",
-    "lint": "ng lint"
+    "lint": "ng lint angular-tinymce"
   },
   "typings": "./index.d.ts",
   "peerDependencies": {
