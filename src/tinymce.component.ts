@@ -17,12 +17,9 @@
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/skipWhile';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/observable/interval';
-import 'rxjs/add/observable/fromEvent';
+import { interval } from 'rxjs';
+import { skipWhile, take } from 'rxjs/operators';
+
 
 import { TinyMceEvents } from './tinymce.events';
 
@@ -138,7 +135,7 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
     }
   }
 
-  constructor( @Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
+  constructor(@Inject(TINYMCE_SETTINGS_TOKEN) private _input_settings: any, private ngZone: NgZone) {
 
     this._setSettings(this.settings);
 
@@ -189,9 +186,11 @@ export class TinyMceComponent implements ControlValueAccessor, AfterViewInit, On
   initEditor(): void {
     this.settings.target = this.elem.nativeElement;
     this.initCallbacks(this.settings);
-    Observable.interval(300)
-      .skipWhile(() => !(window as any).tinymce)
-      .take(1)
+    interval(300)
+      .pipe(
+        skipWhile(() => !(window as any).tinymce),
+        take(1)
+      )
       .subscribe(() => {
         tinymce.init(this.settings);
       });

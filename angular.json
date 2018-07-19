@@ -1,60 +1,126 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
-    "name": "angular-tinymce"
-  },
-  "apps": [
-    {
-      "root": "example",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [],
-      "scripts": [
-        "../node_modules/tinymce/tinymce.js",
-        "../node_modules/tinymce/themes/modern/theme.js"
-      ],
-      "environmentSource": "config/environment.ts",
-      "environments": {
-        "dev": "config/environment.ts",
-        "prod": "config/environment.prod.ts"
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-tinymce": {
+      "root": "",
+      "sourceRoot": "example",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "example/index.html",
+            "main": "example/main.ts",
+            "tsConfig": "example/tsconfig.app.json",
+            "polyfills": "example/polyfills.ts",
+            "assets": [
+              "example/assets",
+              "example/favicon.ico"
+            ],
+            "styles": [],
+            "scripts": [
+              "node_modules/tinymce/tinymce.js",
+              "node_modules/tinymce/themes/modern/theme.js"
+            ]
+          },
+          "configurations": {
+            "prod": {
+              "fileReplacements": [
+                {
+                  "replace": "example/config/environment.ts",
+                  "with": "example/config/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular-tinymce:build"
+          },
+          "configurations": {
+            "prod": {
+              "browserTarget": "angular-tinymce:build:prod"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-tinymce:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "example/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "example/polyfills.ts",
+            "tsConfig": "example/tsconfig.spec.json",
+            "scripts": [
+              "node_modules/tinymce/tinymce.js",
+              "node_modules/tinymce/themes/modern/theme.js"
+            ],
+            "styles": [],
+            "assets": [
+              "example/assets",
+              "example/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "example/tsconfig.app.json",
+              "example/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "angular-tinymce-e2e": {
+      "root": "",
+      "sourceRoot": "e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "angular-tinymce:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
       }
     }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
   },
-  "lint": [
-    {
-      "project": "example/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "example/tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
-    }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "scss",
-    "class": {
+  "defaultProject": "angular-tinymce",
+  "schematics": {
+    "@schematics/angular:class": {
       "spec": false
     },
-    "component": {}
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
   }
 }
