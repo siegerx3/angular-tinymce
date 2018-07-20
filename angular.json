@@ -24,6 +24,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "watch": false,
             "main": "projects/angular-tinymce/src/test.ts",
             "tsConfig": "projects/angular-tinymce/tsconfig.spec.json",
             "karmaConfig": "projects/angular-tinymce/karma.conf.js"
@@ -102,6 +103,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "watch": false,
             "main": "projects/example/src/test.ts",
             "polyfills": "projects/example/src/polyfills.ts",
             "tsConfig": "projects/example/tsconfig.spec.json",
