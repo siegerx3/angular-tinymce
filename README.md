@@ -1,6 +1,6 @@
 # angular-tinymce
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/siegerx3/angular-tinymce.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/siegerx3/angular-tinymce.svg?branch=master)](https://travis-ci.org/siegerx3/angular-tinymce)
 
 [![npm version](https://badge.fury.io/js/angular-tinymce.svg)](https://badge.fury.io/js/angular-tinymce)
 
