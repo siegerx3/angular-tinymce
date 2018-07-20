@@ -27,7 +27,7 @@ after_success:
   angular-cli-ghpages --dir="dist-ghpages" --repo="https://${GH_TOKEN}@github.com/siegerx3/angular-tinymce.git"
   --name="Sr. Travis" --email="hi@travis.org"; fi
 before_deploy:
-- cd dist
+- cd dist/angular-tinymce
 deploy:
   provider: npm
   email: siegerx3-games@yahoo.de
