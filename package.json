@@ -25,7 +25,7 @@
     "example:e2e": "ng run example-e2e:e2e",
     "example:build": "ng run example:build:production",
     "example:build-pages": "ng run example:build:production --base-href \"https://siegerx3.github.io/angular-tinymce/\" --output-path \"dist/ghpages\"",
-    "test":"ng run angular-tinymce:test",
+    "test": "ng run angular-tinymce:test",
     "build": "ng run angular-tinymce:build:production"
   },
   "devDependencies": {
@@ -65,7 +65,7 @@
     "tsickle": ">=0.25.5",
     "tslib": "^1.7.1",
     "tslint": "~5.11.0",
-    "typescript": "^2.7.2",
+    "typescript": "2.7.2",
     "zone.js": "^0.8.26"
   },
   "publishConfig": {
