@@ -25,6 +25,7 @@
     "example:e2e": "ng run example-e2e:e2e",
     "example:build": "ng run example:build:production",
     "example:build-pages": "ng run example:build:production --base-href \"https://siegerx3.github.io/angular-tinymce/\" --output-path \"dist/ghpages\"",
+    "lint": "ng run angular-tinymce:lint",
     "test": "ng run angular-tinymce:test",
     "build": "ng run angular-tinymce:build:production"
   },
