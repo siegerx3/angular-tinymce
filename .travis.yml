@@ -16,7 +16,6 @@ install:
 - npm install
 - npm install -g angular-cli-ghpages
 script:
-- npm run example:test
 - npm run example:lint
 - npm run example:e2e
 - npm run test
