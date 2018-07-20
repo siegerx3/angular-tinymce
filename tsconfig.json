@@ -1,20 +1,28 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-      "outDir": "./dist/out-tsc",
-      "sourceMap": true,
-      "declaration": false,
-      "moduleResolution": "node",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "target": "es5",
-      "typeRoots": [
-        "node_modules/@types"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "angular-tinymce": [
+        "dist/angular-tinymce"
       ],
-      "lib": [
-        "es2017",
-        "dom"
+      "angular-tinymce/*": [
+        "dist/angular-tinymce/*"
       ]
     }
   }
-  
+}

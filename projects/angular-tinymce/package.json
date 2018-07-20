@@ -1,0 +1,10 @@
+{
+  "name": "angular-tinymce",
+  "version": "6.0.0",
+  "peerDependencies": {
+    "@angular/common": ">= 6.0.9",
+    "@angular/core": ">= 6.0.9",
+    "@angular/forms": ">= 6.0.9",
+    "tinymce": ">= 4.8.0"
+  }
+}

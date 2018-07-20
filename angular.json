@@ -1,60 +1,163 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
-    "name": "angular-tinymce"
-  },
-  "apps": [
-    {
-      "root": "example",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-tinymce": {
+      "root": "projects/angular-tinymce",
+      "sourceRoot": "projects/angular-tinymce/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/angular-tinymce/tsconfig.lib.json",
+            "project": "projects/angular-tinymce/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/angular-tinymce/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-tinymce/src/test.ts",
+            "tsConfig": "projects/angular-tinymce/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-tinymce/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-tinymce/tsconfig.lib.json",
+              "projects/angular-tinymce/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "example": {
+      "root": "projects/example/",
+      "sourceRoot": "projects/example/src",
+      "projectType": "application",
       "prefix": "app",
-      "styles": [],
-      "scripts": [
-        "../node_modules/tinymce/tinymce.js",
-        "../node_modules/tinymce/themes/modern/theme.js"
-      ],
-      "environmentSource": "config/environment.ts",
-      "environments": {
-        "dev": "config/environment.ts",
-        "prod": "config/environment.prod.ts"
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/example",
+            "index": "projects/example/src/index.html",
+            "main": "projects/example/src/main.ts",
+            "polyfills": "projects/example/src/polyfills.ts",
+            "tsConfig": "projects/example/tsconfig.app.json",
+            "assets": [
+              "projects/example/src/favicon.ico",
+              "projects/example/src/assets"
+            ],
+            "styles": [],
+            "scripts": [
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/tinymce/themes/modern/theme.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/example/src/environments/environment.ts",
+                  "with": "projects/example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "example:build:production"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/example/src/test.ts",
+            "polyfills": "projects/example/src/polyfills.ts",
+            "tsConfig": "projects/example/tsconfig.spec.json",
+            "karmaConfig": "projects/example/karma.conf.js",
+            "styles": [],
+            "scripts": [
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/tinymce/themes/modern/theme.js"
+            ],
+            "assets": [
+              "projects/example/src/favicon.ico",
+              "projects/example/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/example/tsconfig.app.json",
+              "projects/example/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "example-e2e": {
+      "root": "projects/example-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/example-e2e/protractor.conf.js",
+            "devServerTarget": "example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "example:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/example-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
       }
     }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
   },
-  "lint": [
-    {
-      "project": "example/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "example/tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
-    }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "scss",
-    "class": {
-      "spec": false
-    },
-    "component": {}
-  }
+  "defaultProject": "angular-tinymce"
 }

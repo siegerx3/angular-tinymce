@@ -1,0 +1,22 @@
+<div class="greetings center">
+  <h1>Angular Tinymce</h1>
+
+  <section id="global-config">
+    <h2>With global config</h2>
+    <div class="left">
+      <angular-tinymce [(ngModel)]='content'></angular-tinymce>
+    </div>
+    <div class="right">
+      <p>{{ content }}</p>
+    </div>
+  </section>
+  <section id="custom-config">
+    <h2>With custom config</h2>
+    <div class="left">
+      <angular-tinymce [settings]="customSettings" [(ngModel)]='content2'></angular-tinymce>
+    </div>
+    <div class="right">
+        <p>{{ content2 }}</p>
+    </div>
+  </section>
+</div>

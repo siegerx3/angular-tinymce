@@ -21,6 +21,8 @@ describe('TinyMceComponent', () => {
   it('should create component', () => {
     const fixture = TestBed.createComponent(TinyMceComponent);
     const testComponent = fixture.debugElement.componentInstance;
+
+    expect(testComponent).toBeDefined();
   });
 
   it('should have settings applied', () => {

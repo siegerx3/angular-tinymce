@@ -16,10 +16,12 @@ install:
 - npm install
 - npm install -g angular-cli-ghpages
 script:
+- npm run example:test
+- npm run example:lint
+- npm run example:e2e
 - npm run test
-- npm run e2e
+- npm run example:build-pages
 - npm run build
-- npm run build-ghpages
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then
   angular-cli-ghpages --dir="dist-ghpages" --repo="https://${GH_TOKEN}@github.com/siegerx3/angular-tinymce.git"
