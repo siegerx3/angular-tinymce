@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/angular-tinymce.svg)](https://badge.fury.io/js/angular-tinymce)
 
-[Example](https://siegerx3.github.io/angular-tinymce/)
+[Example](https://stewieoO.github.io/angular-tinymce/)
 
 ## Important changes
 
