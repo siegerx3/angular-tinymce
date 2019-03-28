@@ -1,6 +1,6 @@
 # angular-tinymce
 
-[![Build Status](https://travis-ci.org/siegerx3/angular-tinymce.svg?branch=master)](https://travis-ci.org/siegerx3/angular-tinymce)
+[![Build Status](https://travis-ci.org/stewieoO/angular-tinymce.svg?branch=master)](https://travis-ci.org/stewieoO/angular-tinymce)
 
 [![npm version](https://badge.fury.io/js/angular-tinymce.svg)](https://badge.fury.io/js/angular-tinymce)
 
